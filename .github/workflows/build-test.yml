@@ -19,5 +19,5 @@ jobs:
     with:
       docker_files_name: Dockerfile
       version: ${{ vars.VERSION }}
-      user: ${{ secrets.USER }}
+      user: ${{ vers.USER }}
     secrets: inherit
