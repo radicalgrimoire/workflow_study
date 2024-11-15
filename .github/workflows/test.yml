@@ -4,22 +4,24 @@ on:
   workflow_call:
     inputs:
       docker_files_name:
-        description: Dockerfile's name
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
+      user:
         required: true
         type: string
 
-env:
-  VERSION: ${{ vars.VERSION }}
 
 jobs:
-
   test:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
-
       - name: Run tests
         run: |
             docker build \
-             -f ./build/${{ inputs.docker_files_name }} ./build
+             --build-arg VERSION=${{ inputs.version }} \
+             --build-arg P4USER=${{ inputs.user }} \
+            -f ./build/${{ inputs.docker_files_name }} ./build

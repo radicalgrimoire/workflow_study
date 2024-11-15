@@ -18,4 +18,6 @@ jobs:
     uses: ./.github/workflows/test.yml
     with:
       docker_files_name: Dockerfile
+      version: ${{ vars.VERSION }}
+      user: ${{ secrets.USER }}
     secrets: inherit
