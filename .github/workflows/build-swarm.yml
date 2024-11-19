@@ -17,7 +17,6 @@ jobs:
   test:
     uses: ./.github/workflows/test.yml
     with:
-      docker_files_name: Dockerfile
-      version: ${{ vars.VERSION }}
-      user: ${{ vars.USER }}
+      dockerfile: Dockerfile
+      dockerfile_folder: helix-swarm
     secrets: inherit

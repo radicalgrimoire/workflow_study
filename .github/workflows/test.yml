@@ -3,13 +3,10 @@ name: test
 on:
   workflow_call:
     inputs:
-      docker_files_name:
+      dockerfile:
         required: true
         type: string
-      version:
-        required: true
-        type: string
-      user:
+      dockerfile_folder:
         required: true
         type: string
 
@@ -22,6 +19,4 @@ jobs:
       - name: Run tests
         run: |
             docker build \
-             --build-arg VERSION=${{ inputs.version }} \
-             --build-arg P4USER=${{ inputs.user }} \
-            -f ./build/${{ inputs.docker_files_name }} ./build
+            -f ./${{ inputs.dockerfile_folder }}/${{ inputs.dockerfile }} ./build
