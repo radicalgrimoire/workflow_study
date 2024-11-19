@@ -63,5 +63,5 @@ jobs:
           docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.version }}.${{ inputs.version_substr }}$GITHUB_RUN_NUMBER
           docker push $IMAGE_ID:${{ inputs.version }}.${{ inputs.version_substr }}$GITHUB_RUN_NUMBER
 
-          docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
-          docker push $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
+          # docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
+          # docker push $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
