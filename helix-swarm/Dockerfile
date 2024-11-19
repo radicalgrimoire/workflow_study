@@ -29,7 +29,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && apt-get autoremove -y
 
 
-COPY Version /opt/perforce/etc/Docker-Version
 COPY setup/* /opt/perforce/swarm/sbin/
 RUN  chmod 755 /opt/perforce/swarm/sbin/swarm-docker-setup.sh
 
