@@ -25,14 +25,12 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && echo "deb http://package.perforce.com/apt/ubuntu noble release" > /etc/apt/sources.list.d/perforce.list \
     && apt-get update && apt-get -y install helix-cli helix-swarm \
     && apt-get clean \
-    && mkdir -p /opt/perforce/swarm/p4-bin/ \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get autoremove -y
 
 
 COPY Version /opt/perforce/etc/Docker-Version
-COPY setup/swarm-docker-setup.sh /opt/perforce/swarm/sbin/swarm-docker-setup.sh
-COPY setup/helix-swarm.p4-extension /tmp/helix-swarm.p4-extension
+COPY setup/* /opt/perforce/swarm/sbin/
 RUN  chmod 755 /opt/perforce/swarm/sbin/swarm-docker-setup.sh
 
 # Simple Swarm configuration
