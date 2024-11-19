@@ -29,7 +29,9 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && apt-get autoremove -y
 
 
-COPY setup/* /opt/perforce/swarm/sbin/
+COPY Version /opt/perforce/etc/Docker-Version
+COPY setup/swarm-docker-setup.sh /opt/perforce/swarm/sbin/swarm-docker-setup.sh
+COPY setup/helix-swarm.p4-extension /opt/perforce/swarm/p4-bin/helix-swarm.p4-extension
 RUN  chmod 755 /opt/perforce/swarm/sbin/swarm-docker-setup.sh
 
 # Simple Swarm configuration
