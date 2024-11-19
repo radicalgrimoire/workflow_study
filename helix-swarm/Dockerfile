@@ -38,9 +38,6 @@ RUN  chmod 755 /opt/perforce/swarm/sbin/swarm-docker-setup.sh
 RUN echo http://localhost >> /opt/perforce/etc/swarm-cron-hosts.conf
 RUN rm -f /etc/apache2/sites-enabled/000*
 
-
 ENV P4DGRACE=$P4DGRACE
-
-
 
 CMD /opt/perforce/swarm/sbin/swarm-docker-setup.sh

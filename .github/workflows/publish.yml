@@ -3,17 +3,18 @@ name: publish
 on:
   workflow_call:
     inputs:
-      docker_files_name:
-        description: Dockerfile's name
+      dockerfile:
         required: true
         type: string
-      version_substr:
-        description: Version substring
-        required: false
+      dockerfile_folder:
+        required: true
         type: string
-
-env:
-  VERSION: ${{ vars.VERSION }}
+      image_name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
 
 
 jobs:
@@ -31,7 +32,7 @@ jobs:
       - name: Build image
         run: |
             docker build \
-             -f ./build/${{ inputs.docker_files_name }} ./build
+            -f ./${{ inputs.dockerfile_folder }}/${{ inputs.dockerfile }} ./${{ inputs.dockerfile_folder }}
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
@@ -43,7 +44,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=ghcr.io/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=ghcr.io/${{ github.repository }}/${{ inputs.image_name }}
 
           # Convert to lowercase.
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
@@ -52,13 +53,13 @@ jobs:
           TAG_SUFFIX=""
           if [ "${{ github.event_name }}" == "schedule" ]; then
             TAG_SUFFIX="nightly"
-            docker tag $IMAGE_NAME $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
-            docker push $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX  
+            docker tag ${{ inputs.image_name }} $IMAGE_ID:$TAG_SUFFIX
+            docker push $IMAGE_ID:$TAG_SUFFIX  
           fi
 
           TAG_SUFFIX="latest"
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION.${{ inputs.version_substr }}$GITHUB_RUN_NUMBER
-          docker push $IMAGE_ID:$VERSION.${{ inputs.version_substr }}$GITHUB_RUN_NUMBER
+          docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.dockerfile_folder }}.$GITHUB_RUN_NUMBER
+          docker push $IMAGE_ID:${{ inputs.dockerfile_folder }}.$GITHUB_RUN_NUMBER
 
-          docker tag $IMAGE_NAME $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
-          docker push $IMAGE_ID:${{ inputs.version_substr }}$TAG_SUFFIX
+          docker tag ${{ inputs.image_name }} $IMAGE_ID:$TAG_SUFFIX
+          docker push $IMAGE_ID:$TAG_SUFFIX

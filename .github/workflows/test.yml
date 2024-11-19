@@ -9,7 +9,12 @@ on:
       dockerfile_folder:
         required: true
         type: string
-
+      image_name:
+        required: true
+        type: string
+      version:
+        required: true
+        type: string
 
 jobs:
   test:
