@@ -59,12 +59,12 @@ jobs:
 
           echo "${{ inputs.image_name }}"
           echo $IMAGE_ID
-          echo ${{ inputs.dockerfile_folder }}
+          echo ${{ inputs.version }}
           echo $GITHUB_RUN_NUMBER
           
           TAG_SUFFIX="latest"
-          docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.dockerfile_folder }}.$GITHUB_RUN_NUMBER
-          docker push $IMAGE_ID:${{ inputs.dockerfile_folder }}.$GITHUB_RUN_NUMBER
+          docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.version }}.$GITHUB_RUN_NUMBER
+          docker push $IMAGE_ID:${{ inputs.version }}.$GITHUB_RUN_NUMBER
 
           docker tag ${{ inputs.image_name }} $IMAGE_ID:$TAG_SUFFIX
           docker push $IMAGE_ID:$TAG_SUFFIX
