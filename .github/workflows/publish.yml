@@ -49,6 +49,8 @@ jobs:
           # Convert to lowercase.
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
+          docker images
+
           # If the event that triggered this workflow is a schedule event, then tag the image as "nightly".
           TAG_SUFFIX=""
           if [ "${{ github.event_name }}" == "schedule" ]; then
