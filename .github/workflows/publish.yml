@@ -49,8 +49,6 @@ jobs:
           # Convert to lowercase.
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          docker images
-
           # If the event that triggered this workflow is a schedule event, then tag the image as "nightly".
           TAG_SUFFIX=""
           if [ "${{ github.event_name }}" == "schedule" ]; then
@@ -59,6 +57,11 @@ jobs:
             docker push $IMAGE_ID:$TAG_SUFFIX  
           fi
 
+          echo "${{ inputs.image_name }}"
+          echo $IMAGE_ID
+          echo ${{ inputs.dockerfile_folder }}
+          echo $GITHUB_RUN_NUMBER
+          
           TAG_SUFFIX="latest"
           docker tag ${{ inputs.image_name }} $IMAGE_ID:${{ inputs.dockerfile_folder }}.$GITHUB_RUN_NUMBER
           docker push $IMAGE_ID:${{ inputs.dockerfile_folder }}.$GITHUB_RUN_NUMBER
