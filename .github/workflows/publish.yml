@@ -32,7 +32,7 @@ jobs:
         run: |
             docker build \
             -f ./${{ inputs.dockerfile_folder }}/${{ inputs.dockerfile }} ./${{ inputs.dockerfile_folder }} \
-            -t ${{ inputs.image_name }}
+            -t ${{ inputs.image_name }}:latest
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
