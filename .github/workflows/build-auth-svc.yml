@@ -17,8 +17,8 @@ jobs:
     with:
       # The Dockerfile to build
       dockerfile: Dockerfile
-      image_name: helix-swarm
-      version: 2024.5
+      image_name: helix-auth-svc
+      version: 2024.2
     secrets: inherit
 
   push:
@@ -27,6 +27,6 @@ jobs:
     with:
       # The Dockerfile to build
       dockerfile: Dockerfile
-      image_name: helix-swarm
-      version: 2024.5
+      image_name: helix-auth-svc
+      version: 2024.2
     secrets: inherit

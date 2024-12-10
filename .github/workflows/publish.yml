@@ -6,9 +6,6 @@ on:
       dockerfile:
         required: true
         type: string
-      dockerfile_folder:
-        required: true
-        type: string
       image_name:
         required: true
         type: string
@@ -31,7 +28,7 @@ jobs:
       - name: Build image
         run: |
             docker build \
-            -f ./${{ inputs.dockerfile_folder }}/${{ inputs.dockerfile }} ./${{ inputs.dockerfile_folder }} \
+            -f ./${{ inputs.image_name }}/${{ inputs.dockerfile }} ./${{ inputs.image_name }} \
             -t ${{ inputs.image_name }}:latest
 
       - name: Log into registry
