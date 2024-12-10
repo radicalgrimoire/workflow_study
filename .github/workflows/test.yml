@@ -21,4 +21,5 @@ jobs:
       - name: Run tests
         run: |
             docker build \
-            -f ./${{ inputs.dockerfile_folder }}/${{ inputs.dockerfile }} ./${{ inputs.dockerfile_folder }}
+            -f ./${{ inputs.image_name }}/${{ inputs.dockerfile }} ./${{ inputs.image_name }} \
+            -t ${{ inputs.image_name }}:latest
