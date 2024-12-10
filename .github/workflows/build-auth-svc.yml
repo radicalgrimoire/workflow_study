@@ -1,4 +1,4 @@
-name: build-swarm
+name: build-auth-svc
 
 on:
   schedule:

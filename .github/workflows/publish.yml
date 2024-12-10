@@ -12,8 +12,6 @@ on:
       version:
         required: true
         type: string
-      version_substr:
-        type: string
 
 jobs:
 
